@@ -7,8 +7,9 @@ defmodule Pingpong.Ping do
 
   # Server
   def init(pong_pid) do
-    # call ping
-    Pingpong.Pong.ping(pong_pid)
+    # calling Pong
+
+    Process.send_after(pong_pid, :ping, 2000)
     {:ok, []}
   end
 end
