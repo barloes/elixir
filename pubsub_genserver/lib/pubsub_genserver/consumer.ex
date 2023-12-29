@@ -1,6 +1,5 @@
 defmodule PubsubGenserver.Consumer do
   use GenServer
-
   @topic "test"
 
   def start_link(_opts) do
