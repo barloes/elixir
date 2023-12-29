@@ -1,0 +1,5 @@
+{
+	"elixirLS.projectDir": ".",
+	"elixirLS.mixEnv": "dev"
+	// Other project-specific settings
+}

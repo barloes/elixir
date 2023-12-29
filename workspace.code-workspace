@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "./pubsub_genserver"
+		},
+		{
+			"path": "./pingpong_sync"
+		},
+		{
+			"path": "./pingpong_async"
+		}
+	],
+	"settings": {}
+}

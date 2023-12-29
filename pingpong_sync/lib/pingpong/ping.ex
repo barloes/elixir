@@ -14,7 +14,7 @@ defmodule Pingpong.Ping do
   end
 
   def handle_info({:ping, pong_pid}, state) do
-    {:pong, pong_state} = GenServer.call(pong_pid, :ping)
+    {:pong, pong_state} = Pingpong.Pong.ping(pong_pid)
     IO.puts("Ping received #{pong_state}")
     Process.send_after(self(), {:ping, pong_pid}, 2000)
 

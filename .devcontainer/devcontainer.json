@@ -1,0 +1,14 @@
+{
+	"name": "Elixir Development",
+	"dockerFile": "Dockerfile",
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"elixirLS.dialyzerEnabled": true,
+		"elixirLS.suggestSpecs": true
+	},
+	"extensions": ["jakebecker.elixir-ls"],
+	"workspaceFolder": "/workspace",
+	"mounts": [
+		"source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+	]
+}
