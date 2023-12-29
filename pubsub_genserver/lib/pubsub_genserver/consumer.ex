@@ -12,13 +12,8 @@ defmodule PubsubGenserver.Consumer do
     {:ok, %{}}
   end
 
-  def handle_info({:pubsub, _from, _topic, payload}, state) do
-    IO.inspect(payload)
-    {:noreply, state}
-  end
-
   def handle_info(message, state) do
-    IO.inspect(message, label: "Unexpected message")
+    IO.inspect(message)
     {:noreply, state}
   end
 end

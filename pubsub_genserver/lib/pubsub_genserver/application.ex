@@ -9,7 +9,8 @@ defmodule PubsubGenserver.Application do
   def start(_type, _args) do
     children = [
       {Phoenix.PubSub, adapter: Phoenix.PubSub.PG2, name: PubsubGenserver.PubSub},
-      {PubsubGenserver.Consumer, name: PubsubGenserver.Consumer}
+      {PubsubGenserver.Consumer, name: PubsubGenserver.Consumer},
+      {PubsubGenserver.Producer, name: PubsubGenserver.Producer}
       # Starts a worker by calling: PubsubGenserver.Worker.start_link(arg)
       # {PubsubGenserver.Worker, arg}
     ]
