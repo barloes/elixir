@@ -1,6 +1,9 @@
 {
 	"folders": [
 		{
+			"path": "."
+		},
+		{
 			"path": "./pubsub_genserver"
 		},
 		{
@@ -8,6 +11,9 @@
 		},
 		{
 			"path": "./pingpong_async"
+		},
+		{
+			"path": "pubsub_redis"
 		}
 	],
 	"settings": {}
