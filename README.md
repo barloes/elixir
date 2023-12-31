@@ -5,6 +5,18 @@ mix deps.get
 mix deps.compile
 iex -S mix
 
+# permission issue
+
+```
+sudo chown -R $(whoami):$(whoami) *
+sudo chmod -R u+rw *
+```
+
+# setting up kafka
+
+- https://github.com/barloes/learning-kafka
+  kafka-console-producer --topic test --bootstrap-server localhost:29092
+
 <!-- # umbrella app
 mix new distributed_pubsub --umbrella
 mix new apps/consumer --module Consumer --sup
