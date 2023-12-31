@@ -1,14 +1,10 @@
 import Config
 
 config :kafka_ex,
-  # List of Kafka brokers as host:port strings
-  brokers: [
-    {"localhost", 19092}
-  ],
-  # required for for kraft
+  brokers: System.get_env("BROKERS", "localhost:19092"),
   kafka_version: "kayrock",
-  consumer_group: "test_consumer_group",
-  topics: ["test"],
+  consumer_group: System.get_env("CONSUMER_GROUP", "default_consumer_group"),
+  topics: String.split(System.get_env("TOPIC_NAMES", "test"), ","),
   consumer_group_opts: [
     heartbeat_interval: 1_000,
     commit_interval: 1_000,

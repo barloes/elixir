@@ -5,11 +5,24 @@ defmodule KafkaConsumer.Application do
 
   use Application
 
+  def parse_kafka_brokers(brokers_string) do
+    brokers_string
+    # Split by comma to get the individual "host:port" pairs
+    |> String.split(",")
+    |> Enum.map(fn broker ->
+      # Split by colon to separate host and port
+      [host, port_string] = String.split(broker, ":")
+      # Convert to a tuple with an integer port
+      {host, String.to_integer(port_string)}
+    end)
+    |> IO.inspect(label: "brokers")
+  end
+
   @impl true
   def start(_type, _args) do
     import Supervisor.Spec
     # Retrieve configuration for KafkaEx
-    brokers = Application.get_env(:kafka_ex, :brokers)
+    brokers = parse_kafka_brokers(Application.get_env(:kafka_ex, :brokers))
     consumer_group_name = Application.get_env(:kafka_ex, :consumer_group)
     topic_names = Application.get_env(:kafka_ex, :topics)
     consumer_group_opts = Application.get_env(:kafka_ex, :consumer_group_opts)
