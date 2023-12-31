@@ -15,12 +15,10 @@ defmodule KafkaConsumer.Application do
       # Convert to a tuple with an integer port
       {host, String.to_integer(port_string)}
     end)
-    |> IO.inspect(label: "brokers")
   end
 
   @impl true
   def start(_type, _args) do
-    import Supervisor.Spec
     # Retrieve configuration for KafkaEx
     brokers = parse_kafka_brokers(Application.get_env(:kafka_ex, :brokers))
     consumer_group_name = Application.get_env(:kafka_ex, :consumer_group)
@@ -33,16 +31,18 @@ defmodule KafkaConsumer.Application do
     IO.puts("consumer_group_opts: #{inspect(consumer_group_opts)}")
 
     children = [
-      supervisor(
-        KafkaEx.ConsumerGroup,
-        [KafkaConsumer.Consumer, consumer_group_name, topic_names, consumer_group_opts]
-      )
-      # Starts a worker by calling: KafkaConsumer.Worker.start_link(arg)
-      # {KafkaConsumer.Worker, arg}
+      %{
+        id: KafkaEx.ConsumerGroup,
+        start:
+          {KafkaEx.ConsumerGroup, :start_link,
+           [KafkaConsumer.Consumer, consumer_group_name, topic_names, consumer_group_opts]},
+        type: :supervisor,
+        restart: :permanent
+      }
+      # You can add more children here, like workers
+      # %{id: KafkaConsumer.Worker, start: {KafkaConsumer.Worker, :start_link, [arg]}, type: :worker, restart: :permanent}
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: KafkaConsumer.Supervisor]
     Supervisor.start_link(children, opts)
   end
