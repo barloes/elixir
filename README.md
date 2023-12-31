@@ -15,7 +15,16 @@ sudo chmod -R u+rw *
 # setting up kafka
 
 - https://github.com/barloes/learning-kafka
-  kafka-console-producer --topic test --bootstrap-server localhost:29092
+
+````
+kafka-console-producer --topic test --bootstrap-server localhost:29092
+
+iex --sname consumer_1 -S mix
+iex --sname consumer_2 -S mix
+
+```
+
+
 
 <!-- # umbrella app
 mix new distributed_pubsub --umbrella
@@ -38,3 +47,4 @@ Phoenix.PubSub.subscribe(PubsubGenserver.PubSub, "test")
 # reference
 
 - https://papercups.io/blog/genserver
+````
